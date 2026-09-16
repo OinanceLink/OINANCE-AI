@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>OINANCE AI</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         OINANCE AI HEADER
+    ========================== -->
+
+    <header class="topbar">
+
+        <div class="brand">
+            <div class="logo">◎</div>
+
+            <div class="brand-text">
+                <strong>OINANCE</strong>
+                <span>AI</span>
+            </div>
+        </div>
+
+        <button id="newChatBtn" class="new-chat">
+            + New Chat
+        </button>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN AI AREA
+    ========================== -->
+
+    <main class="ai-container">
+
+        <section id="welcomeScreen" class="welcome">
+
+            <div class="welcome-logo">
+                ◎
+            </div>
+
+            <h1>Welcome to OINANCE AI</h1>
+
+            <p>
+                Intelligent technology for your questions,
+                ideas and everyday tasks.
+            </p>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="quick-actions">
+
+                <button class="suggestion">
+                    <span>💡</span>
+                    <div>
+                        <strong>Explain something</strong>
+                        <small>Help me understand a topic</small>
+                    </div>
+                </button>
+
+                <button class="suggestion">
+                    <span>✍️</span>
+                    <div>
+                        <strong>Write something</strong>
+                        <small>Create or improve my writing</small>
+                    </div>
+                </button>
+
+                <button class="suggestion">
+                    <span>💻</span>
+                    <div>
+                        <strong>Help with coding</strong>
+                        <small>Build or fix my code</small>
+                    </div>
+                </button>
+
+                <button class="suggestion">
+                    <span>📚</span>
+                    <div>
+                        <strong>Learn something</strong>
+                        <small>Teach me step by step</small>
+                    </div>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CHAT MESSAGES
+        ========================== -->
+
+        <section id="chatMessages" class="chat-messages"></section>
+
+    </main>
+
+
+    <!-- =========================
+         MESSAGE INPUT
+    ========================== -->
+
+    <footer class="input-area">
+
+        <div class="input-box">
+
+            <textarea
+                id="messageInput"
+                placeholder="Message OINANCE AI..."
+                rows="1"
+            ></textarea>
+
+            <button id="sendBtn" class="send-btn">
+                ↑
+            </button>
+
+        </div>
+
+        <p class="disclaimer">
+            OINANCE AI can make mistakes. Check important information.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+  </html>
