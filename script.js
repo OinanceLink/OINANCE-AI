@@ -1,6 +1,6 @@
 /* =========================
    OINANCE AI
-   MAIN JAVASCRIPT
+   ADVANCED CHAT JAVASCRIPT
 ========================= */
 
 const messageInput = document.getElementById("messageInput");
@@ -20,30 +20,88 @@ function sendMessage() {
 
     const message = messageInput.value.trim();
 
-    if (message === "") {
+    if (!message) {
         return;
     }
 
-    // Hide welcome screen
     welcomeScreen.style.display = "none";
 
-    // Add user message
     addUserMessage(message);
 
-    // Clear input
     messageInput.value = "";
 
-    // Reset textarea height
     messageInput.style.height = "auto";
 
-    // Temporary AI response
+    showThinking();
+
     setTimeout(() => {
 
+        removeThinking();
+
         addAIMessage(
-            "Hello! I'm OINANCE AI. I'm currently being connected to my AI engine. Soon I'll be able to help you with questions, coding, writing, learning and much more."
+            getDemoResponse(message)
         );
 
-    }, 600);
+    }, 1000);
+}
+
+
+/* =========================
+   DEMO AI RESPONSES
+========================= */
+
+function getDemoResponse(message) {
+
+    const text = message.toLowerCase();
+
+    if (
+        text.includes("hello") ||
+        text.includes("hi") ||
+        text.includes("hey")
+    ) {
+
+        return "Hello! Welcome to OINANCE AI. I'm ready to help you explore ideas, learn, write and build.";
+
+    }
+
+    if (
+        text.includes("who are you") ||
+        text.includes("what are you")
+    ) {
+
+        return "I'm OINANCE AI, an AI assistant being developed by OINANCE Technology.";
+
+    }
+
+    if (
+        text.includes("code") ||
+        text.includes("coding") ||
+        text.includes("javascript") ||
+        text.includes("website")
+    ) {
+
+        return "I can help you build websites, understand programming concepts, debug code and learn technology step by step.";
+
+    }
+
+    if (
+        text.includes("bitcoin") ||
+        text.includes("crypto")
+    ) {
+
+        return "I can help explain Bitcoin and cryptocurrency concepts. When we connect the real AI engine, OINANCE AI will be able to provide much more detailed answers.";
+
+    }
+
+    if (
+        text.includes("thank")
+    ) {
+
+        return "You're welcome. I'm here whenever you need help.";
+
+    }
+
+    return "That's an interesting question. The OINANCE AI engine is still being connected. Once the real AI engine is activated, I'll be able to give you much more detailed answers.";
 }
 
 
@@ -86,6 +144,13 @@ function addAIMessage(message) {
 
         <div class="message-content">
             ${escapeHTML(message)}
+
+            <button
+                class="copy-btn"
+                onclick="copyResponse(this)"
+            >
+                Copy
+            </button>
         </div>
     `;
 
@@ -96,14 +161,80 @@ function addAIMessage(message) {
 
 
 /* =========================
-   QUICK SUGGESTIONS
+   THINKING ANIMATION
+========================= */
+
+function showThinking() {
+
+    const thinking = document.createElement("div");
+
+    thinking.className = "message ai";
+
+    thinking.id = "thinkingMessage";
+
+    thinking.innerHTML = `
+        <div class="ai-avatar">
+            ◎
+        </div>
+
+        <div class="message-content thinking">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    `;
+
+    chatMessages.appendChild(thinking);
+
+    scrollToBottom();
+}
+
+
+function removeThinking() {
+
+    const thinking =
+        document.getElementById("thinkingMessage");
+
+    if (thinking) {
+        thinking.remove();
+    }
+}
+
+
+/* =========================
+   COPY AI RESPONSE
+========================= */
+
+function copyResponse(button) {
+
+    const content =
+        button.parentElement;
+
+    const text =
+        content.innerText.replace("Copy", "").trim();
+
+    navigator.clipboard.writeText(text);
+
+    button.textContent = "Copied";
+
+    setTimeout(() => {
+
+        button.textContent = "Copy";
+
+    }, 1500);
+}
+
+
+/* =========================
+   QUICK ACTIONS
 ========================= */
 
 suggestions.forEach(button => {
 
     button.addEventListener("click", () => {
 
-        const title = button.querySelector("strong").textContent;
+        const title =
+            button.querySelector("strong").textContent;
 
         const prompts = {
 
@@ -127,7 +258,6 @@ suggestions.forEach(button => {
         messageInput.focus();
 
         autoResize();
-
     });
 
 });
@@ -137,31 +267,43 @@ suggestions.forEach(button => {
    SEND BUTTON
 ========================= */
 
-sendBtn.addEventListener("click", sendMessage);
+sendBtn.addEventListener(
+    "click",
+    sendMessage
+);
 
 
 /* =========================
    ENTER TO SEND
 ========================= */
 
-messageInput.addEventListener("keydown", (event) => {
+messageInput.addEventListener(
+    "keydown",
+    event => {
 
-    if (event.key === "Enter" && !event.shiftKey) {
+        if (
+            event.key === "Enter" &&
+            !event.shiftKey
+        ) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        sendMessage();
+            sendMessage();
+        }
 
     }
-
-});
+);
 
 
 /* =========================
-   AUTO RESIZE TEXTAREA
+   AUTO RESIZE
 ========================= */
 
-messageInput.addEventListener("input", autoResize);
+messageInput.addEventListener(
+    "input",
+    autoResize
+);
+
 
 function autoResize() {
 
@@ -169,7 +311,6 @@ function autoResize() {
 
     messageInput.style.height =
         messageInput.scrollHeight + "px";
-
 }
 
 
@@ -177,19 +318,24 @@ function autoResize() {
    NEW CHAT
 ========================= */
 
-newChatBtn.addEventListener("click", () => {
+newChatBtn.addEventListener(
+    "click",
+    () => {
 
-    chatMessages.innerHTML = "";
+        chatMessages.innerHTML = "";
 
-    welcomeScreen.style.display = "block";
+        welcomeScreen.style.display =
+            "block";
 
-    messageInput.value = "";
+        messageInput.value = "";
 
-    messageInput.style.height = "auto";
+        messageInput.style.height =
+            "auto";
 
-    messageInput.focus();
+        messageInput.focus();
 
-});
+    }
+);
 
 
 /* =========================
@@ -201,12 +347,15 @@ function scrollToBottom() {
     setTimeout(() => {
 
         window.scrollTo({
-            top: document.body.scrollHeight,
+
+            top:
+                document.body.scrollHeight,
+
             behavior: "smooth"
+
         });
 
     }, 50);
-
 }
 
 
@@ -216,10 +365,10 @@ function scrollToBottom() {
 
 function escapeHTML(text) {
 
-    const div = document.createElement("div");
+    const div =
+        document.createElement("div");
 
     div.textContent = text;
 
     return div.innerHTML;
-
 }
